@@ -107,7 +107,9 @@ namespace PersonsApi.Controllers
             var result = await personsService
                 .GetPersonAsync(new PersonId(id), ct);
 
-            return result;
+            return result != null
+                ? Ok(result)
+                : NotFound();
         }
 
 
