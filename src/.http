@@ -1,0 +1,26 @@
+@personsapi = http://localhost:5168/api/persons
+@notesapi = http://localhost:5208/api/notes
+
+### Old way: simple call - uses same model as core
+GET {{personsapi}}/no-model/all
+
+### Old way: look for a single person
+GET {{personsapi}}/no-model/10
+
+### Old way: look for a single person
+GET {{personsapi}}/api-model/10
+
+###
+GET {{personsapi}}/api-model/all
+
+###
+GET {{personsapi}}/result-based/all
+
+###
+GET {{personsapi}}/result-based/page/1
+
+###
+GET {{personsapi}}/result-based-raw/10
+
+###
+GET {{personsapi}}/result-based/10
