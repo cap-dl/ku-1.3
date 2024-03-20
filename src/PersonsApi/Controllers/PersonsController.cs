@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PersonsApi.Models;
 using FluentResults;
 using ApiShared.Models;
+using slJson = Diware.SL.SystemTextJsonModels.Pagination;
 
 namespace PersonsApi.Controllers
 {
@@ -75,11 +76,11 @@ namespace PersonsApi.Controllers
         public async Task<IActionResult> GetAllAsync_Result(
             CancellationToken ct)
         {
-            var items = await personsService.OldGetPagedPersonsAsync(
+            var result = await personsService.GetPagedPersonsAsync(
                 PageInfo.All(), ct);
-            var models = mapper.Map<IEnumerable<PersonModel>>(items);
-            //var rv = 
-            throw new NotImplementedException();
+            var rv = mapper.Map<RefResultModel<slJson.ListPage<PersonModel>>>(result);
+
+            return Ok(rv);
         }
 
 
@@ -92,8 +93,8 @@ namespace PersonsApi.Controllers
         {
             var pi = new PageInfo(p, i);
 
-            var page = await personsService.OldGetPagedPersonsAsync(pi, ct);
-            var rv = mapper.Map<ListPage<PersonModel>>(page);
+            var page = await personsService.GetPagedPersonsAsync(pi, ct);
+            var rv = mapper.Map<RefResultModel<slJson.ListPage<PersonModel>>>(page);
 
             return Ok(rv);
         }
@@ -136,9 +137,66 @@ namespace PersonsApi.Controllers
             var result = await personsService
                 .GetPersonAsync(new PersonId(id), ct);
 
-            var rv = mapper.Map<ResultModel<PersonModel>>(result);
+            var rv = mapper.Map<RefResultModel<PersonModel>>(result);
 
             return Ok(rv);
+        }
+
+
+        [HttpGet("result-based-built-in-model/nested-errors/{a:int}/{b:int}")]
+        public async Task<IActionResult> GetNestedErrorsAsync_BuiltInModel(
+            int a, int b,
+            CancellationToken ct)
+        {
+            var rv = Divide(a, b);
+            return rv.ToActionResult();
+        }
+
+
+        [HttpGet("result-based/nested-errors/{a:int}/{b:int}")]
+        public async Task<IActionResult> GetNestedErrorsAsync(
+            int a, int b,
+            CancellationToken ct)
+        {
+            if (a == 404)
+            {
+                return NotFound("Cannot find the endpoint.");
+            }
+
+
+            var rv = Divide(a, b);
+            var model = mapper.Map<ValueResultModel<int>>(rv);
+            return Ok(model);
+        }
+
+
+        private Result<int> Divide(int a, int b)
+        {
+            var r = CheckNull(b);
+            if (r.IsFailed)
+            {
+                return Result.Fail("Cannot divide!")
+                    .WithErrors(r.Errors);
+            }
+            else
+            {
+                var rv = a / r.Value;
+                return Result.Ok(rv);
+            }
+
+        }
+
+
+        private Result<int> CheckNull(int number)
+        {
+            if (number != 0)
+            {
+                return Result.Ok(number);
+            }
+            else
+            {
+                return Result.Fail<int>("Divider is a zero.");
+            }
         }
     }
 }

@@ -55,4 +55,13 @@ public class PersonsService
             return Result.Fail<Person>("Not found");
         }
     }
+
+
+    public async Task<Result<ListPage<Person>>> GetPagedPersonsAsync(
+        PageInfo pageInfo,
+        CancellationToken ct)
+    {
+        var page = await repo.GetPagedPersonsAsync(pageInfo, ct);
+        return Result.Ok(page);
+    }
 }

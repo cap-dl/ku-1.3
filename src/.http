@@ -28,3 +28,11 @@ GET {{personsapi}}/result-based/all
 ###
 GET {{personsapi}}/result-based/page/1
 
+###
+GET {{personsapi}}/result-based-built-in-model/nested-errors/12/0
+
+###
+GET {{personsapi}}/result-based/nested-errors/12/0
+
+###
+GET {{personsapi}}/result-based/nested-errors/404/42

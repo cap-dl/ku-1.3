@@ -12,8 +12,14 @@ namespace ApiShared.Mapping
             CreateMap<IError, ErrorModel>();
             CreateMap<Error, ErrorModel>();
 
-            CreateMap(typeof(Result<>), typeof(ResultModel<>))
-                .ForMember(nameof(ResultModel<int>.Value), o =>
+            CreateMap(typeof(Result<>), typeof(RefResultModel<>))
+                .ForMember(nameof(RefResultModel<int>.Value), o =>
+                {
+                    o.MapFrom(nameof(Result<int>.ValueOrDefault));
+                });
+
+            CreateMap(typeof(Result<>), typeof(ValueResultModel<>))
+                .ForMember(nameof(RefResultModel<int>.Value), o =>
                 {
                     o.MapFrom(nameof(Result<int>.ValueOrDefault));
                 });
