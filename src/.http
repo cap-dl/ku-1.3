@@ -10,8 +10,17 @@ GET {{personsapi}}/no-model/10
 ### Old way: look for a single person
 GET {{personsapi}}/api-model/10
 
-###
+### compare size!
 GET {{personsapi}}/api-model/all
+
+###
+GET {{personsapi}}/result-based-raw/10
+
+###
+GET {{personsapi}}/result-based-built-in-model/10
+
+###
+GET {{personsapi}}/result-based/101
 
 ###
 GET {{personsapi}}/result-based/all
@@ -19,8 +28,3 @@ GET {{personsapi}}/result-based/all
 ###
 GET {{personsapi}}/result-based/page/1
 
-###
-GET {{personsapi}}/result-based-raw/10
-
-###
-GET {{personsapi}}/result-based/10

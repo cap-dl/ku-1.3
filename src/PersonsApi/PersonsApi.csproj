@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiShared\ApiShared.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 

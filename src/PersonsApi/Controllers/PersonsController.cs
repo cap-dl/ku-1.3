@@ -5,6 +5,7 @@ using FluentResults.Extensions.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using PersonsApi.Models;
 using FluentResults;
+using ApiShared.Models;
 
 namespace PersonsApi.Controllers
 {
@@ -98,12 +99,10 @@ namespace PersonsApi.Controllers
         }
 
 
-        [HttpGet("result-based/{id}")]
+        [HttpGet("result-based-raw/{id}")]
         public async Task<IActionResult> GetOneAsync_ResultRaw(
             int id, CancellationToken ct)
         {
-            //IResult<PersonModel> rv;
-
             var result = await personsService
                 .GetPersonAsync(new PersonId(id), ct);
 
@@ -113,8 +112,8 @@ namespace PersonsApi.Controllers
         }
 
 
-        [HttpGet("result-based/{id}")]
-        public async Task<IActionResult> GetOneAsync_Result(
+        [HttpGet("result-based-built-in-model/{id}")]
+        public async Task<IActionResult> GetOneAsync_Result_BuiltInModel(
             int id, CancellationToken ct)
         {
             //IResult<PersonModel> rv;
@@ -127,6 +126,19 @@ namespace PersonsApi.Controllers
                 .ToActionResult();
 
             return rv;
+        }
+
+
+        [HttpGet("result-based/{id}")]
+        public async Task<IActionResult> GetOneAsync_Result(
+            int id, CancellationToken ct)
+        {
+            var result = await personsService
+                .GetPersonAsync(new PersonId(id), ct);
+
+            var rv = mapper.Map<ResultModel<PersonModel>>(result);
+
+            return Ok(rv);
         }
     }
 }

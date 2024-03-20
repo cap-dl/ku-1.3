@@ -1,3 +1,4 @@
+using ApiShared;
 using AutoMapper;
 using Core;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -12,12 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAutoMapper(
-    typeof(Program),
-    typeof(Diware.SL.SystemTextJsonModels.AutoMapper
-        .SystemTextJsonModelsProfile));
-
-builder.Services.AddDemoCore();
+builder.Services
+    .AddAutoMapper(
+        typeof(Program),
+        typeof(Diware.SL.SystemTextJsonModels.AutoMapper
+            .SystemTextJsonModelsProfile))
+    .AddDemoCore()
+    .AddApiShared();
 
 var app = builder.Build();
 

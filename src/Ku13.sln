@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonsApi", "PersonsApi\Pe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotesApi", "NotesApi\NotesApi.csproj", "{34129589-CC54-4EFB-A107-9F428CD675D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiShared", "ApiShared\ApiShared.csproj", "{F606E619-A5B0-4B2C-B502-C3AECECFF677}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{34129589-CC54-4EFB-A107-9F428CD675D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34129589-CC54-4EFB-A107-9F428CD675D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34129589-CC54-4EFB-A107-9F428CD675D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F606E619-A5B0-4B2C-B502-C3AECECFF677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F606E619-A5B0-4B2C-B502-C3AECECFF677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F606E619-A5B0-4B2C-B502-C3AECECFF677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F606E619-A5B0-4B2C-B502-C3AECECFF677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
